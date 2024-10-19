@@ -1,3 +1,12 @@
+# TODO:
+
+Fork of hsand's great utility to generate wireguard configurations for Private Internet Access.
+
+## Use case
+I want the ability to generate a Wireguard configuration in a container in a non-interactive manner to allow a new configuration to be generated when the current/previous one expires.
+
+-------------------
+
 # pia-wg
 A WireGuard configuration utility for Private Internet Access
 
