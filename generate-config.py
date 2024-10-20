@@ -9,11 +9,15 @@ def print_locations(pia):
         print(f"  {location}")
 
 def main():
+<<<<<<< HEAD
     # subparsers for generate & get locations
+=======
+>>>>>>> 4774d36 (Updated from Black linter)
     parser = argparse.ArgumentParser(description="Generate PIA WireGuard configuration")
     subparsers = parser.add_subparsers(dest='command', required=True)
 
     # Subparser for get-locations
+<<<<<<< HEAD
     get_locations_parser = subparsers.add_parser('get-locations', help="Print all available PIA Wireguard server locations")
 
     # Subparser for generate
@@ -22,6 +26,16 @@ def main():
     generate_parser.add_argument("--password", required=True, help="PIA password")
     generate_parser.add_argument("--location", required=True, help="PIA server location (i.e., UK-London or 'UK London')")
     generate_parser.add_argument("--output-dir", help="Directory to save the configuration file (i.e. /etc/wireguard/, default: current directory)")
+=======
+    get_locations_parser = subparsers.add_parser('get-locations', help="Print all available locations and exit")
+
+    # Subparser for generate
+    generate_parser = subparsers.add_parser('generate', help="Generate the configuration file")
+    generate_parser.add_argument("--username", required=True, help="PIA username")
+    generate_parser.add_argument("--password", required=True, help="PIA password")
+    generate_parser.add_argument("--location", required=True, help="PIA server location (e.g., UK-London)")
+    generate_parser.add_argument("--output-dir", help="Directory to save the configuration file (default: current directory)")
+>>>>>>> 4774d36 (Updated from Black linter)
 
     args = parser.parse_args()
 
@@ -39,19 +53,31 @@ def main():
             print_locations(pia)
             return
 
+<<<<<<< HEAD
         # generate public and private key pair
+=======
+        # Generate public and private key pair
+>>>>>>> 4774d36 (Updated from Black linter)
         pia.generate_keys()
         pia.set_region(location)
         print(f"Selected '{location}'")
 
+<<<<<<< HEAD
         # get token
+=======
+        # Get token
+>>>>>>> 4774d36 (Updated from Black linter)
         if pia.get_token(args.username, args.password):
             print("Login successful!")
         else:
             print("Error logging in. Please check your credentials.")
             return
 
+<<<<<<< HEAD
         # add key
+=======
+        # Add key
+>>>>>>> 4774d36 (Updated from Black linter)
         status, response = pia.addkey()
         if status:
             print("Added key to server!")
@@ -60,6 +86,7 @@ def main():
             print(response)
             return
 
+<<<<<<< HEAD
         # guild config
         config_filename = 'pia.conf'
         
@@ -68,15 +95,33 @@ def main():
         config_path = os.path.join(output_dir, config_filename)
 
         # check the output directory exists
+=======
+        # Build config
+        config_filename = 'pia.conf'
+        
+        # Use the specified output directory or the current directory
+        output_dir = args.output_dir if args.output_dir else os.getcwd()
+        config_path = os.path.join(output_dir, config_filename)
+
+        # Ensure the output directory exists
+>>>>>>> 4774d36 (Updated from Black linter)
         os.makedirs(output_dir, exist_ok=True)
 
         print(f"Saving configuration file: {config_path}")
         
+<<<<<<< HEAD
         # get current time for the comment
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         with open(config_path, 'w') as file:
             file.write(f"# configuration generated on {current_time}\n\n")
+=======
+        # Get current time for the comment
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        with open(config_path, 'w') as file:
+            file.write(f"# PIA WireGuard configuration generated on {current_time}\n\n")
+>>>>>>> 4774d36 (Updated from Black linter)
             file.write('[Interface]\n')
             file.write(f'Address = {pia.connection["peer_ip"]}\n')
             file.write(f'PrivateKey = {pia.privatekey}\n')
