@@ -27,7 +27,7 @@ jobs:
 
     - name: Compile code with Nuitka
       run: |
-        python -m nuitka --follow-imports --standalone --onefile --output-filename=wg-generator generate-config.py
+        python -m nuitka --follow-imports --standalone --onefile --static-libpython=yes --output-filename=wg-generator generate-config.py
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
