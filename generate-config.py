@@ -21,7 +21,8 @@ def main():
     generate_parser.add_argument("--username", required=True, help="PIA username")
     generate_parser.add_argument("--password", required=True, help="PIA password")
     generate_parser.add_argument("--location", required=True, help="PIA server location (i.e., UK-London or 'UK London')")
-    generate_parser.add_argument("--output-dir", help="Directory to save the configuration file (i.e. /etc/wireguard/, default: current directory)"
+    generate_parser.add_argument("--output-dir", help="Directory to save the configuration file (i.e. /etc/wireguard/, default: current directory)")
+    generate_parser.add_argument("--output-name", default="pia.conf", help="Name of the config file to generate (i.e. pia.conf)")
 
     args = parser.parse_args()
 
@@ -60,15 +61,8 @@ def main():
             print(response)
             return
 
-        # build config
-        config_filename = 'pia.conf'
-        
-        # save to the specified output directory or the current directory
-        output_dir = args.output_dir if args.output_dir else os.getcwd()
-        config_path = os.path.join(output_dir, config_filename)
-
         # Build config
-        config_filename = 'pia.conf'
+        config_filename = args.output_name
         
         # Use the specified output directory or the current directory
         output_dir = args.output_dir if args.output_dir else os.getcwd()
